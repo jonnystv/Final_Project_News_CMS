@@ -1,8 +1,6 @@
 package com.example.codeclan.newscmsserver;
 
-import com.example.codeclan.newscmsserver.models.Article;
-import com.example.codeclan.newscmsserver.models.User;
-import com.example.codeclan.newscmsserver.models.UserType;
+import com.example.codeclan.newscmsserver.models.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -114,6 +112,142 @@ class NewsCmsServerApplicationTests {
 		user1.addArticle(article2);
 		user1.removeArticle(article1);
 		assertEquals(1, user1.getUserArticleCount());
+	}
+
+	//ARTICLE TESTS
+	@Test
+	public void articleHasTitle() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		assertEquals("Big News", article1.getTitle());
+	}
+
+	@Test
+	public void canSetArticleTitle() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		article1.setTitle("In Other News");
+		assertEquals("In Other News", article1.getTitle());
+	}
+
+	@Test
+	public void articleHasHeadline() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		assertEquals("Loads of Stuff Happened", article1.getHeadline());
+	}
+
+	@Test
+	public void canSetArticleHeadline() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		article1.setHeadline("Loads of Other Stuff Happened");
+		assertEquals("Loads of Other Stuff Happened", article1.getHeadline());
+	}
+
+	@Test
+	public void articleHasSummary() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		assertEquals("This is the summary...", article1.getSummary());
+	}
+
+	@Test
+	public void canSetArticleSummary() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		article1.setSummary("This is the sunny summary...");
+		assertEquals("This is the sunny summary...", article1.getSummary());
+	}
+
+	@Test
+	public void articleHasFullText() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		assertEquals("This is the full text of the article", article1.getFullText());
+	}
+
+	@Test
+	public void canSetFullText() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		article1.setFullText("This is the full text of the article and a bit more");
+		assertEquals("This is the full text of the article and a bit more", article1.getFullText());
+	}
+
+	@Test
+	public void articleHasAuthor() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		assertEquals(user1, article1.getAuthor());
+	}
+
+	@Test
+	public void canSetArticleAuthor() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		User user2 = new User("Jim", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		article1.setAuthor(user2);
+		assertEquals(user2, article1.getAuthor());
+	}
+
+	@Test
+	public void articleHasDate() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		assertEquals("12-03-2021", article1.getDate());
+	}
+
+	@Test
+	public void canSetDate() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
+		article1.setDate("20-03-2021");
+		assertEquals("20-03-2021", article1.getDate());
+	}
+
+	@Test
+	public void canAddCategoryToArticle() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
+		Category cat1 = new Category("Politics");
+		article1.addCategory(cat1);
+		assertEquals(1, article1.getCategoryCount());
+	}
+
+	@Test
+	public void canRemoveCategoryFromArticle() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
+		Category cat1 = new Category("Politics");
+		Category cat2 = new Category("Technology");
+		article1.addCategory(cat1);
+		article1.addCategory(cat2);
+		article1.removeCategory(cat1);
+		assertEquals(1, article1.getCategoryCount());
+	}
+
+	@Test
+	public void canAddCommentToArticle() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		article1.addComment(comment1);
+		assertEquals(1, article1.getCommentCount());
+	}
+
+	@Test
+	public void canRemoveCommentFromArticle() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		Comment comment2 = new Comment("Rubbish Post", "Best post all week", user1, "12-03-2021");
+		Comment comment3 = new Comment("Brilliant Post", "Best post all week", user1, "12-03-2021");
+		article1.addComment(comment1);
+		article1.addComment(comment2);
+		article1.addComment(comment3);
+		article1.removeComment(comment1);
+		assertEquals(2, article1.getCommentCount());
 	}
 
 }
