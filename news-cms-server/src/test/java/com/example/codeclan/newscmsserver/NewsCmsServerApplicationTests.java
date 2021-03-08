@@ -279,4 +279,80 @@ class NewsCmsServerApplicationTests {
 		assertEquals(1, cms1.getArticleCount());
 	}
 
+	//CATEGORY TESTS
+	@Test
+	public void categoryHasName() {
+		Category cat1 = new Category("Politics");
+		assertEquals("Politics", cat1.getCategoryName());
+	}
+
+	@Test
+	public void categoryCanSetFirstName() {
+		Category cat1 = new Category("Politics");
+		cat1.setCategoryName("Technology");
+		assertEquals("Technology", cat1.getCategoryName());
+	}
+
+	//COMMENT TESTS
+	@Test
+	public void commentHasTitle() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		assertEquals("Great Post", comment1.getCommentTitle());
+	}
+
+	@Test
+	public void commentCanSetTitle() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		comment1.setCommentTitle("Wonderful Post");
+		assertEquals("Wonderful Post", comment1.getCommentTitle());
+	}
+
+	@Test
+	public void commentHasText() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		assertEquals("Best post all week", comment1.getCommentText());
+	}
+
+	@Test
+	public void commentCanSetText() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		comment1.setCommentText("Best post all month");
+		assertEquals("Best post all month", comment1.getCommentText());
+	}
+
+	@Test
+	public void commentHasAuthor() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		assertEquals(user1, comment1.getCommentAuthor());
+	}
+
+	@Test
+	public void commentCanSetAuthor() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		User user2 = new User("Jim", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		comment1.setCommentAuthor(user2);
+		assertEquals(user2, comment1.getCommentAuthor());
+	}
+
+	@Test
+	public void commentHasDate() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		assertEquals("12-03-2021", comment1.getCommentDate());
+	}
+
+	@Test
+	public void commentCanSetDate() {
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021");
+		comment1.setCommentDate("21-03-2021");
+		assertEquals("21-03-2021", comment1.getCommentDate());
+	}
+
 }
