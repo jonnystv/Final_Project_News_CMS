@@ -250,4 +250,33 @@ class NewsCmsServerApplicationTests {
 		assertEquals(2, article1.getCommentCount());
 	}
 
+	//ALLARTICLES TESTS
+
+	@Test
+	public void canAddArticlesToAllArticles() {
+		AllArticles cms1 = new AllArticles("CMS1");
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
+		Article article2 = new Article("Bigger News", "Tons of Stuff Happened", "This is the next summary...", "This is the full text of the article2", user1, "13-03-2021");
+		Article article3 = new Article("Biggest News", "Much Stuff Happened", "This is another summary...", "This is the full text of the article3", user1, "14-03-2021");
+		cms1.addArticle(article1);
+		cms1.addArticle(article2);
+		assertEquals(2, cms1.getArticleCount());
+	}
+
+	@Test
+	public void canRemoveArticlesFromAllArticles() {
+		AllArticles cms1 = new AllArticles("CMS1");
+		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
+		Article article2 = new Article("Bigger News", "Tons of Stuff Happened", "This is the next summary...", "This is the full text of the article2", user1, "13-03-2021");
+		Article article3 = new Article("Biggest News", "Much Stuff Happened", "This is another summary...", "This is the full text of the article3", user1, "14-03-2021");
+		cms1.addArticle(article1);
+		cms1.addArticle(article2);
+		cms1.addArticle(article3);
+		cms1.removeArticle(article2);
+		cms1.removeArticle(article3);
+		assertEquals(1, cms1.getArticleCount());
+	}
+
 }
