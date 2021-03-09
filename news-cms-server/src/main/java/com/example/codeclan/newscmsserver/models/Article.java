@@ -24,14 +24,19 @@ public class Article {
     @Column(name = "summary")
     private String summary;
 
-    @Column(name = "full_text")
+    @Column(name = "full_text", length = 1000)
     private String fullText;
 
-    //MANY TO ONE WITH USERS****
+    @ManyToOne
+    @JoinColumn(name = "allArticles_id", nullable = false)
+    @JsonIgnoreProperties({"articleList"})
+    private AllArticles allArticles;
+
+    //MANY TO ONE WITH USERS
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties({"articles"})
-    private User author;
+    private User user;
 
     @Column(name = "date")
     private String date;
@@ -44,15 +49,15 @@ public class Article {
     //ONE TO MANY WITH COMMENTS
     @JsonIgnoreProperties({"article"})
     @OneToMany(mappedBy = "article")
-
     private List<Comment> comments;
 
-    public Article(String title, String headline, String summary, String fullText, User author, String date) {
+    public Article(String title, String headline, String summary, String fullText, AllArticles allArticles, User user, String date) {
         this.title = title;
         this.headline = headline;
         this.summary = summary;
         this.fullText = fullText;
-        this.author = author;
+        this.allArticles = allArticles;
+        this.user = user;
         this.date = date;
         this.categories = new ArrayList<Category>();
         this.comments = new ArrayList<Comment>();
@@ -94,11 +99,11 @@ public class Article {
     }
 
     public User getAuthor() {
-        return author;
+        return user;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setAuthor(User user) {
+        this.user = user;
     }
 
     public String getDate() {
@@ -155,5 +160,13 @@ public class Article {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public AllArticles getAllArticles() {
+        return allArticles;
+    }
+
+    public void setAllArticles(AllArticles allArticles) {
+        this.allArticles = allArticles;
     }
 }

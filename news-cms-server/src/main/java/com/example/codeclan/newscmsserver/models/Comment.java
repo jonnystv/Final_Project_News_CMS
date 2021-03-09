@@ -22,16 +22,22 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties({"comments"})
-    private User commentAuthor;
+    private User user;
 
     @Column(name = "comment_date")
     private String commentDate;
 
-    public Comment(String commentTitle, String commentText, User commentAuthor, String commentDate) {
+    @ManyToOne
+    @JoinColumn(name = "article_id", nullable = false)
+    @JsonIgnoreProperties({"comments"})
+    private Article article;
+
+    public Comment(String commentTitle, String commentText, User user, String commentDate, Article article) {
         this.commentTitle = commentTitle;
         this.commentText = commentText;
-        this.commentAuthor = commentAuthor;
+        this.user = user;
         this.commentDate = commentDate;
+        this.article = article;
     }
 
     public Comment() {
@@ -54,11 +60,11 @@ public class Comment {
     }
 
     public User getCommentAuthor() {
-        return commentAuthor;
+        return user;
     }
 
     public void setCommentAuthor(User commentAuthor) {
-        this.commentAuthor = commentAuthor;
+        this.user = commentAuthor;
     }
 
     public String getCommentDate() {
@@ -75,5 +81,13 @@ public class Comment {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }

@@ -1,5 +1,7 @@
 package com.example.codeclan.newscmsserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 
 @Entity
@@ -13,8 +15,14 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
-    public Category(String categoryName) {
+    @ManyToOne
+    @JoinColumn(name = "article_id", nullable = false)
+    @JsonIgnoreProperties({"categories"})
+    private Article article;
+
+    public Category(String categoryName, Article article) {
         this.categoryName = categoryName;
+        this.article = article;
     }
 
     public Category() {
@@ -35,5 +43,13 @@ public class Category {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Article getArticle() {
+        return article;
+    }
+
+    public void setArticle(Article article) {
+        this.article = article;
     }
 }
