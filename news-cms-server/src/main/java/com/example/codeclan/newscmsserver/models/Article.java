@@ -1,23 +1,49 @@
 package com.example.codeclan.newscmsserver.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "articles")
 public class Article {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "title")
     private String title;
 
+    @Column(name = "headline")
     private String headline;
 
+    @Column(name = "summary")
     private String summary;
 
+    @Column(name = "full_text")
     private String fullText;
 
+    //MANY TO ONE WITH USERS****
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"articles"})
     private User author;
 
+    @Column(name = "date")
     private String date;
 
+    //ONE TO MANY WITH CATEGORIES
+    @JsonIgnoreProperties({"article"})
+    @OneToMany(mappedBy = "article")
     private List<Category> categories;
+
+    //ONE TO MANY WITH COMMENTS
+    @JsonIgnoreProperties({"article"})
+    @OneToMany(mappedBy = "article")
 
     private List<Comment> comments;
 
@@ -30,6 +56,9 @@ public class Article {
         this.date = date;
         this.categories = new ArrayList<Category>();
         this.comments = new ArrayList<Comment>();
+    }
+
+    public Article() {
     }
 
     public String getTitle() {
@@ -118,5 +147,13 @@ public class Article {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
