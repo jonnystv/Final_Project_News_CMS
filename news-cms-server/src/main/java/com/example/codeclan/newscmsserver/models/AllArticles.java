@@ -1,6 +1,7 @@
 package com.example.codeclan.newscmsserver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class AllArticles {
 
     public AllArticles(String name) {
         this.name = name;
-        this.articleList = new ArrayList<Article>();
+        this.articleList = new ArrayList<>();
     }
 
     public AllArticles() {
@@ -39,6 +40,14 @@ public class AllArticles {
         this.name = name;
     }
 
+    public List<Article> getArticleList() {
+        return articleList;
+    }
+
+    public void setArticleList(List<Article> articleList) {
+        this.articleList = articleList;
+    }
+
     public int getArticleCount() {
         return this.articleList.size();
     }
@@ -49,14 +58,6 @@ public class AllArticles {
 
     public void removeArticle(Article article) {
         this.articleList.remove(article);
-    }
-
-    public List<Article> getArticleList() {
-        return articleList;
-    }
-
-    public void setArticleList(List<Article> articleList) {
-        this.articleList = articleList;
     }
 
     public Long getId() {
