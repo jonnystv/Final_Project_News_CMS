@@ -31,14 +31,9 @@ public class User {
     private UserType type;
 
     //ONE TO MANY WITH ARTICLES
-    @JsonIgnoreProperties({"user"})
-    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties(value="user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Article> userArticles;
-
-    //ONE TO MANY WITH COMMENTS
-    @JsonIgnoreProperties({"user"})
-    @OneToMany(mappedBy = "user")
-    private List<Comment> userComments;
 
     public User(String firstName, String lastName, String userName, String email, UserType type) {
         this.firstName = firstName;
@@ -47,7 +42,6 @@ public class User {
         this.email = email;
         this.type = type;
         this.userArticles = new ArrayList<Article>();
-        this.userComments = new ArrayList<Comment>();
     }
 
     public User() {
@@ -115,27 +109,6 @@ public class User {
 
     public void setUserArticles(List<Article> userArticles) {
         this.userArticles = userArticles;
-    }
-
-    public int getUserCommentCount() {
-        return this.userComments.size();
-    }
-
-    public void addComment(Comment comment) {
-        this.userComments.add(comment);
-    }
-
-    public void removeComment(Comment comment) {
-        this.userComments.remove(comment);
-    }
-
-
-    public List<Comment> getUserComments() {
-        return userComments;
-    }
-
-    public void setUserComments(List<Comment> userComments) {
-        this.userComments = userComments;
     }
 
     public Long getId() {

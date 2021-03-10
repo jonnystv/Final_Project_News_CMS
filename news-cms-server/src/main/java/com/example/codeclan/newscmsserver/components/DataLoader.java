@@ -15,8 +15,6 @@ public class DataLoader implements ApplicationRunner {
     @Autowired
     CategoryRepository categoryRepository;
     @Autowired
-    CommentRepository commentRepository;
-    @Autowired
     UserRepository userRepository;
 
     public DataLoader() {
@@ -67,76 +65,37 @@ public class DataLoader implements ApplicationRunner {
         Category cat8 = new Category("Entertainment", article1);
         categoryRepository.save(cat8);
 
-        Comment comment1 = new Comment("Best Post Ever", "Look, I can take you as far as Anchorhead. You can get a transport there to Mos Eisley or wherever you're going. Still, she's got a lot of spirit. I don't know, what do you think? No! Alderaan is peaceful. We have no weapons. You can't possibly…", bobsmith, "23/03/2021", article1);
-        commentRepository.save(comment1);
-        Comment comment2 = new Comment("Pile of Nonsense", "Red Five standing by. In my experience, there is no such thing as luck.", jillduffy, "03/03/2021", article1);
-        commentRepository.save(comment2);
-        Comment comment3 = new Comment("You're 'avin' a larf!", "Don't act so surprised, Your Highness. You weren't on any mercy mission this time.", jimbrown, "24/03/2021", article1);
-        commentRepository.save(comment3);
-        Comment comment4 = new Comment("You go girl!", "I don't know what you're talking about. I am a member of the Imperial Senate on a diplomatic mission to Alderaan", bobsmith, "23/05/2021", article1);
-        commentRepository.save(comment4);
-        Comment comment5 = new Comment("Utter Bollocks", "Kid, I've flown from one side of this galaxy to the other. I've seen a lot of strange stuff", anngreen, "23/02/2021", article1);
-        commentRepository.save(comment5);
-        Comment comment6 = new Comment("Lovely Stuff", "You're all clear, kid. Let's blow this thing and go home!", anngreen, "23/03/2021", article1);
-        commentRepository.save(comment6);
-        Comment comment7 = new Comment("Not Worth Reading", "Well, take care of yourself, Han. I guess that's what you're best at, ain't it?", jillduffy, "23/06/2021", article1);
-        commentRepository.save(comment7);
-        Comment comment8 = new Comment("Worst Post Ever", "Don't be too proud of this technological terror you've constructed. The ability to destroy a planet is insignificant next to the power of the Force.", jimbrown, "14/03/2021", article1);
-        commentRepository.save(comment8);
-        Comment comment9 = new Comment("Third Worst Ever", "Look, I ain't in this for your revolution, and I'm not in it for you, Princess. I expect to be well paid.", bobsmith, "23/01/2021", article1);
-        commentRepository.save(comment9);
-        Comment comment10 = new Comment("WTF!", "A tremor in the Force. The last time I felt it was in the presence of my old master.", jillduffy, "20/01/2021", article1);
-        commentRepository.save(comment10);
-
         article1.addCategory(cat1);
         article1.addCategory(cat3);
-        article1.addComment(comment1);
-        article1.addComment(comment4);
-        article1.addComment(comment8);
-        article1.addComment(comment9);
         articleRepository.save(article1);
 
         article2.addCategory(cat2);
         article2.addCategory(cat3);
-        article1.addComment(comment2);
-        article1.addComment(comment3);
         articleRepository.save(article2);
 
         article3.addCategory(cat1);
         article3.addCategory(cat4);
-        article1.addComment(comment10);
-        article1.addComment(comment6);
         articleRepository.save(article3);
 
         article4.addCategory(cat2);
         article4.addCategory(cat3);
         article4.addCategory(cat4);
-        article1.addComment(comment1);
-        article1.addComment(comment10);
         articleRepository.save(article4);
 
         article5.addCategory(cat1);
         article5.addCategory(cat3);
-        article1.addComment(comment8);
-        article1.addComment(comment9);
         articleRepository.save(article5);
 
         article6.addCategory(cat2);
         article6.addCategory(cat8);
-        article1.addComment(comment5);
-        article1.addComment(comment7);
         articleRepository.save(article6);
 
         article7.addCategory(cat6);
         article7.addCategory(cat7);
-        article1.addComment(comment3);
-        article1.addComment(comment9);
         articleRepository.save(article7);
 
         article8.addCategory(cat8);
         article8.addCategory(cat6);
-        article1.addComment(comment9);
-        article1.addComment(comment6);
         articleRepository.save(article8);
 
     }

@@ -1,17 +1,43 @@
 package com.example.codeclan.newscmsserver;
 
 import com.example.codeclan.newscmsserver.models.*;
+import com.example.codeclan.newscmsserver.repositories.ArticleRepository;
+import com.example.codeclan.newscmsserver.repositories.CategoryRepository;
+//import com.example.codeclan.newscmsserver.repositories.CommentRepository;
+import com.example.codeclan.newscmsserver.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@RunWith(SpringRunner.class)
 @SpringBootTest
 class NewsCmsServerApplicationTests {
+
+	@Autowired
+	ArticleRepository articleRepository;
+
+	@Autowired
+	CategoryRepository categoryRepository;
+
+//	@Autowired
+//	CommentRepository commentRepository;
+
+	@Autowired
+	UserRepository userRepository;
 
 	@Test
 	void contextLoads() {
 	}
+
+//	public void createUserArticleCategoryThenSaveCategory(){
+//		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
+//		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
+//		Category cat1 = new Category("Politics", article1);
+//	}
 
 	//USER TESTS
 	@Test
@@ -179,7 +205,7 @@ class NewsCmsServerApplicationTests {
 	public void articleHasAuthor() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
 		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
-		assertEquals(user1, article1.getAuthor());
+		assertEquals(user1, article1.getUser());
 	}
 
 	@Test
@@ -187,8 +213,8 @@ class NewsCmsServerApplicationTests {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
 		User user2 = new User("Jim", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
 		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
-		article1.setAuthor(user2);
-		assertEquals(user2, article1.getAuthor());
+		article1.setUser(user2);
+		assertEquals(user2, article1.getUser());
 	}
 
 	@Test
@@ -227,29 +253,6 @@ class NewsCmsServerApplicationTests {
 		assertEquals(1, article1.getCategoryCount());
 	}
 
-	@Test
-	public void canAddCommentToArticle() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		article1.addComment(comment1);
-		assertEquals(1, article1.getCommentCount());
-	}
-
-	@Test
-	public void canRemoveCommentFromArticle() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		Comment comment2 = new Comment("Rubbish Post", "Best post all week", user1, "12-03-2021", article1);
-		Comment comment3 = new Comment("Brilliant Post", "Best post all week", user1, "12-03-2021", article1);
-		article1.addComment(comment1);
-		article1.addComment(comment2);
-		article1.addComment(comment3);
-		article1.removeComment(comment1);
-		assertEquals(2, article1.getCommentCount());
-	}
-
 	//CATEGORY TESTS
 	@Test
 	public void categoryHasName() {
@@ -268,74 +271,5 @@ class NewsCmsServerApplicationTests {
 		assertEquals("Technology", cat1.getCategoryName());
 	}
 
-	//COMMENT TESTS
-	@Test
-	public void commentHasTitle() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		assertEquals("Great Post", comment1.getCommentTitle());
-	}
-
-	@Test
-	public void commentCanSetTitle() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		comment1.setCommentTitle("Wonderful Post");
-		assertEquals("Wonderful Post", comment1.getCommentTitle());
-	}
-
-	@Test
-	public void commentHasText() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		assertEquals("Best post all week", comment1.getCommentText());
-	}
-
-	@Test
-	public void commentCanSetText() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		comment1.setCommentText("Best post all month");
-		assertEquals("Best post all month", comment1.getCommentText());
-	}
-
-	@Test
-	public void commentHasAuthor() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		assertEquals(user1, comment1.getCommentAuthor());
-	}
-
-	@Test
-	public void commentCanSetAuthor() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		User user2 = new User("Jim", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		comment1.setCommentAuthor(user2);
-		assertEquals(user2, comment1.getCommentAuthor());
-	}
-
-	@Test
-	public void commentHasDate() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		assertEquals("12-03-2021", comment1.getCommentDate());
-	}
-
-	@Test
-	public void commentCanSetDate() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Comment comment1 = new Comment("Great Post", "Best post all week", user1, "12-03-2021", article1);
-		comment1.setCommentDate("21-03-2021");
-		assertEquals("21-03-2021", comment1.getCommentDate());
-	}
 
 }

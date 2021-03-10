@@ -15,9 +15,9 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
+    @JsonIgnoreProperties(value="categories")
     @ManyToOne
     @JoinColumn(name = "article_id", nullable = false)
-    @JsonIgnoreProperties({"categories"})
     private Article article;
 
     public Category(String categoryName, Article article) {

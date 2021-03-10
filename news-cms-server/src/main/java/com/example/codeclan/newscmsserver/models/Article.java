@@ -30,23 +30,18 @@ public class Article {
 
 
     //MANY TO ONE WITH USERS
-    @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnoreProperties({"articles"})
+    @ManyToOne
+    @JsonIgnoreProperties(value="articles")
     private User user;
 
     @Column(name = "date")
     private String date;
 
     //ONE TO MANY WITH CATEGORIES
-    @JsonIgnoreProperties({"article"})
-    @OneToMany(mappedBy = "article")
+    @JsonIgnoreProperties(value="article")
+    @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
     private List<Category> categories;
-
-    //ONE TO MANY WITH COMMENTS
-    @JsonIgnoreProperties({"article"})
-    @OneToMany(mappedBy = "article")
-    private List<Comment> comments;
 
     public Article(String title, String headline, String summary, String fullText, User user, String date) {
         this.title = title;
@@ -56,7 +51,6 @@ public class Article {
         this.user = user;
         this.date = date;
         this.categories = new ArrayList<>();
-        this.comments = new ArrayList<>();
     }
 
     public Article() {
@@ -94,13 +88,13 @@ public class Article {
         this.fullText = fullText;
     }
 
-    public User getAuthor() {
-        return user;
-    }
-
-    public void setAuthor(User user) {
-        this.user = user;
-    }
+//    public User getAuthor() {
+//        return user;
+//    }
+//
+//    public void setAuthor(User user) {
+//        this.user = user;
+//    }
 
     public String getDate() {
         return date;
@@ -128,26 +122,6 @@ public class Article {
 
     public void setCategories(List<Category> categories) {
         this.categories = categories;
-    }
-
-    public int getCommentCount() {
-        return comments.size();
-    }
-
-    public void addComment(Comment comment) {
-        this.comments.add(comment);
-    }
-
-    public void removeComment(Comment comment) {
-        this.comments.remove(comment);
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     public Long getId() {
