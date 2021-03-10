@@ -28,10 +28,6 @@ public class Article {
     @Column(name = "full_text", length = 1000)
     private String fullText;
 
-    @ManyToOne
-    @JoinColumn(name = "allArticles_id", nullable = false)
-    @JsonIgnoreProperties({"articleList"})
-    private AllArticles allArticles;
 
     //MANY TO ONE WITH USERS
     @ManyToOne
@@ -52,12 +48,11 @@ public class Article {
     @OneToMany(mappedBy = "article")
     private List<Comment> comments;
 
-    public Article(String title, String headline, String summary, String fullText, AllArticles allArticles, User user, String date) {
+    public Article(String title, String headline, String summary, String fullText, User user, String date) {
         this.title = title;
         this.headline = headline;
         this.summary = summary;
         this.fullText = fullText;
-        this.allArticles = allArticles;
         this.user = user;
         this.date = date;
         this.categories = new ArrayList<>();
@@ -161,14 +156,6 @@ public class Article {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public AllArticles getAllArticles() {
-        return allArticles;
-    }
-
-    public void setAllArticles(AllArticles allArticles) {
-        this.allArticles = allArticles;
     }
 
     public User getUser() {
