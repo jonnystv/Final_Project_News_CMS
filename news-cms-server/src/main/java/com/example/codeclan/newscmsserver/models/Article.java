@@ -16,9 +16,6 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "title")
-    private String title;
-
     @Column(name = "headline")
     private String headline;
 
@@ -43,8 +40,7 @@ public class Article {
     @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
     private List<Category> categories;
 
-    public Article(String title, String headline, String summary, String fullText, User user, String date) {
-        this.title = title;
+    public Article(String headline, String summary, String fullText, User user, String date) {
         this.headline = headline;
         this.summary = summary;
         this.fullText = fullText;
@@ -54,14 +50,6 @@ public class Article {
     }
 
     public Article() {
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getHeadline() {

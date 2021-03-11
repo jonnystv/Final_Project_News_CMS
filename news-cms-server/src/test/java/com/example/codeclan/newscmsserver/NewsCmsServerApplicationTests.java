@@ -120,9 +120,9 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void canAddArticleToUser() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Article article2 = new Article("Bigger News", "Tons of Stuff Happened", "This is the next summary...", "This is the full text of the article2", user1, "13-03-2021");
-		Article article3 = new Article("Biggest News", "Much Stuff Happened", "This is another summary...", "This is the full text of the article3", user1, "14-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
+		Article article2 = new Article("Tons of Stuff Happened", "This is the next summary...", "This is the full text of the article2", user1, "13-03-2021");
+		Article article3 = new Article("Much Stuff Happened", "This is another summary...", "This is the full text of the article3", user1, "14-03-2021");
 		user1.addArticle(article1);
 		user1.addArticle(article2);
 		assertEquals(2, user1.getUserArticleCount());
@@ -131,9 +131,9 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void canRemoveArticleFromUser() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Article article2 = new Article("Bigger News", "Tons of Stuff Happened", "This is the next summary...", "This is the full text of the article2", user1, "13-03-2021");
-		Article article3 = new Article("Biggest News", "Much Stuff Happened", "This is another summary...", "This is the full text of the article3", user1, "14-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
+		Article article2 = new Article("Tons of Stuff Happened", "This is the next summary...", "This is the full text of the article2", user1, "13-03-2021");
+		Article article3 = new Article("Much Stuff Happened", "This is another summary...", "This is the full text of the article3", user1, "14-03-2021");
 		user1.addArticle(article1);
 		user1.addArticle(article2);
 		user1.removeArticle(article1);
@@ -142,31 +142,16 @@ class NewsCmsServerApplicationTests {
 
 	//ARTICLE TESTS
 	@Test
-	public void articleHasTitle() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
-		assertEquals("Big News", article1.getTitle());
-	}
-
-	@Test
-	public void canSetArticleTitle() {
-		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
-		article1.setTitle("In Other News");
-		assertEquals("In Other News", article1.getTitle());
-	}
-
-	@Test
 	public void articleHasHeadline() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		assertEquals("Loads of Stuff Happened", article1.getHeadline());
 	}
 
 	@Test
 	public void canSetArticleHeadline() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		article1.setHeadline("Loads of Other Stuff Happened");
 		assertEquals("Loads of Other Stuff Happened", article1.getHeadline());
 	}
@@ -174,14 +159,14 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void articleHasSummary() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		assertEquals("This is the summary...", article1.getSummary());
 	}
 
 	@Test
 	public void canSetArticleSummary() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		article1.setSummary("This is the sunny summary...");
 		assertEquals("This is the sunny summary...", article1.getSummary());
 	}
@@ -189,14 +174,14 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void articleHasFullText() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		assertEquals("This is the full text of the article", article1.getFullText());
 	}
 
 	@Test
 	public void canSetFullText() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		article1.setFullText("This is the full text of the article and a bit more");
 		assertEquals("This is the full text of the article and a bit more", article1.getFullText());
 	}
@@ -204,7 +189,7 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void articleHasAuthor() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		assertEquals(user1, article1.getUser());
 	}
 
@@ -212,7 +197,7 @@ class NewsCmsServerApplicationTests {
 	public void canSetArticleAuthor() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
 		User user2 = new User("Jim", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		article1.setUser(user2);
 		assertEquals(user2, article1.getUser());
 	}
@@ -220,14 +205,14 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void articleHasDate() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "12-03-2021");
 		assertEquals("12-03-2021", article1.getDate());
 	}
 
 	@Test
 	public void canSetDate() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
 		article1.setDate("20-03-2021");
 		assertEquals("20-03-2021", article1.getDate());
 	}
@@ -235,7 +220,7 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void canAddCategoryToArticle() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
 		Category cat1 = new Category("Politics", article1);
 		article1.addCategory(cat1);
 		assertEquals(1, article1.getCategoryCount());
@@ -244,7 +229,7 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void canRemoveCategoryFromArticle() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
 		Category cat1 = new Category("Politics", article1);
 		Category cat2 = new Category("Technology", article1);
 		article1.addCategory(cat1);
@@ -257,7 +242,7 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void categoryHasName() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
 		Category cat1 = new Category("Politics", article1);
 		assertEquals("Politics", cat1.getCategoryName());
 	}
@@ -265,7 +250,7 @@ class NewsCmsServerApplicationTests {
 	@Test
 	public void categoryCanSetFirstName() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
-		Article article1 = new Article("Big News", "Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
+		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
 		Category cat1 = new Category("Politics", article1);
 		cat1.setCategoryName("Technology");
 		assertEquals("Technology", cat1.getCategoryName());
