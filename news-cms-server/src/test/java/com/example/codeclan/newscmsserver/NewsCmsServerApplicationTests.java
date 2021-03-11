@@ -23,9 +23,6 @@ class NewsCmsServerApplicationTests {
 	@Autowired
 	CategoryRepository categoryRepository;
 
-//	@Autowired
-//	CommentRepository commentRepository;
-
 	@Autowired
 	UserRepository userRepository;
 
@@ -221,7 +218,7 @@ class NewsCmsServerApplicationTests {
 	public void canAddCategoryToArticle() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
 		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
-		Category cat1 = new Category("Politics", article1);
+		Category cat1 = new Category("Politics");
 		article1.addCategory(cat1);
 		assertEquals(1, article1.getCategoryCount());
 	}
@@ -230,8 +227,8 @@ class NewsCmsServerApplicationTests {
 	public void canRemoveCategoryFromArticle() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
 		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article", user1, "21-03-2021");
-		Category cat1 = new Category("Politics", article1);
-		Category cat2 = new Category("Technology", article1);
+		Category cat1 = new Category("Politics");
+		Category cat2 = new Category("Technology");
 		article1.addCategory(cat1);
 		article1.addCategory(cat2);
 		article1.removeCategory(cat1);
@@ -243,7 +240,7 @@ class NewsCmsServerApplicationTests {
 	public void categoryHasName() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
 		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Category cat1 = new Category("Politics", article1);
+		Category cat1 = new Category("Politics");
 		assertEquals("Politics", cat1.getCategoryName());
 	}
 
@@ -251,7 +248,7 @@ class NewsCmsServerApplicationTests {
 	public void categoryCanSetFirstName() {
 		User user1 = new User("Bob", "Smith", "bobsmith", "bob@smith.com", UserType.ADMINISTRATOR);
 		Article article1 = new Article("Loads of Stuff Happened", "This is the summary...", "This is the full text of the article1", user1, "12-03-2021");
-		Category cat1 = new Category("Politics", article1);
+		Category cat1 = new Category("Politics");
 		cat1.setCategoryName("Technology");
 		assertEquals("Technology", cat1.getCategoryName());
 	}

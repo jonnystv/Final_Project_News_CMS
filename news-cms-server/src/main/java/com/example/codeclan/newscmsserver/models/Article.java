@@ -3,6 +3,7 @@ package com.example.codeclan.newscmsserver.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cascade;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "articles")
-public class Article {
+public class Article implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,17 +28,22 @@ public class Article {
 
 
     //MANY TO ONE WITH USERS
-    @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne
     @JsonIgnoreProperties(value="articles")
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @Column(name = "date")
     private String date;
 
-    //ONE TO MANY WITH CATEGORIES
-    @JsonIgnoreProperties(value="article")
-    @OneToMany(mappedBy = "article", fetch = FetchType.LAZY)
+    //MANY TO MANY WITH CATEGORIES
+    @JsonIgnoreProperties(value = "articles")
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            joinColumns = {@JoinColumn(name = "article_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)}
+    )
     private List<Category> categories;
 
     public Article(String headline, String summary, String fullText, User user, String date) {
@@ -46,7 +52,7 @@ public class Article {
         this.fullText = fullText;
         this.user = user;
         this.date = date;
-        this.categories = new ArrayList<>();
+        this.categories = new ArrayList<Category>();
     }
 
     public Article() {
@@ -75,14 +81,6 @@ public class Article {
     public void setFullText(String fullText) {
         this.fullText = fullText;
     }
-
-//    public User getAuthor() {
-//        return user;
-//    }
-//
-//    public void setAuthor(User user) {
-//        this.user = user;
-//    }
 
     public String getDate() {
         return date;

@@ -1,8 +1,11 @@
 package com.example.codeclan.newscmsserver.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -15,14 +18,20 @@ public class Category {
     @Column(name = "category_name")
     private String categoryName;
 
-    @JsonIgnoreProperties(value="categories")
-    @ManyToOne
-    @JoinColumn(name = "article_id", nullable = false)
-    private Article article;
+    //MANY TO MANY WITH USERS
+    @JsonIgnoreProperties(value = "categories")
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            name = "articles_categories",
+            joinColumns = {@JoinColumn(name = "category_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name="article_id", nullable = false, updatable = false)}
+    )
+    private List<Article> articles;;
 
-    public Category(String categoryName, Article article) {
+    public Category(String categoryName) {
         this.categoryName = categoryName;
-        this.article = article;
+        this.articles = new ArrayList<Article>();
     }
 
     public Category() {
@@ -45,11 +54,20 @@ public class Category {
         this.id = id;
     }
 
-    public Article getArticle() {
-        return article;
+    public List<Article> getCategoryArticles() {
+        return articles;
     }
 
-    public void setArticle(Article article) {
-        this.article = article;
+    public void setCategoryArticles(List<Article> categoryArticles) {
+        this.articles = categoryArticles;
     }
+
+    public void addCategoryArticle(Article article) {
+        this.articles.add(article);
+    }
+
+    public void removeCategoryArticle(Article article) {
+        this.articles.remove(article);
+    }
+
 }

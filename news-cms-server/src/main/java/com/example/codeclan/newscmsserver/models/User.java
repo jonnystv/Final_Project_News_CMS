@@ -33,7 +33,7 @@ public class User {
     //ONE TO MANY WITH ARTICLES
     @JsonIgnoreProperties(value="user")
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    private List<Article> userArticles;
+    private List<Article> articles;
 
     public User(String firstName, String lastName, String userName, String email, UserType type) {
         this.firstName = firstName;
@@ -41,7 +41,7 @@ public class User {
         this.userName = userName;
         this.email = email;
         this.type = type;
-        this.userArticles = new ArrayList<Article>();
+        this.articles = new ArrayList<Article>();
     }
 
     public User() {
@@ -92,23 +92,23 @@ public class User {
     }
 
     public int getUserArticleCount() {
-        return this.userArticles.size();
+        return this.articles.size();
     }
 
     public void addArticle(Article article) {
-        this.userArticles.add(article);
+        this.articles.add(article);
     }
 
     public void removeArticle(Article article) {
-        this.userArticles.remove(article);
+        this.articles.remove(article);
     }
 
     public List<Article> getUserArticles() {
-        return userArticles;
+        return articles;
     }
 
     public void setUserArticles(List<Article> userArticles) {
-        this.userArticles = userArticles;
+        this.articles = userArticles;
     }
 
     public Long getId() {
