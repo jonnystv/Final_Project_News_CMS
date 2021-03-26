@@ -1,0 +1,260 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  ul {
+    padding-left: 1.5rem;
+  }
+  
+  body {
+    font-family: franklin-gothic-condensed, sans-serif;
+    color: #CC0000;
+    margin: 0 auto;
+    max-width: 1000px;
+    background-image: url("../images/bg-2.jpg");
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+      margin: 0;
+      color: #CC0000;
+      font-style: italic;
+  }
+  
+  .item {
+    padding: 8px;
+    border-top: 1px solid #3a3a3a;
+    border-bottom: 1px solid #3a3a3a;
+    background-color: rgba(255, 255, 255, 0.3);
+
+
+  }
+  
+  .height-50 {
+    height: 50vh;
+  }
+
+#container {
+    display: grid;
+    height: 100vh;
+    gap: 15px;
+    grid-template-rows: auto;
+    grid-template-areas: "header" "nav" "latest" "latest2" "latest3" "aside" "footer";    
+}
+
+.header {
+    grid-area: header;    
+}
+
+.header h1 {
+    margin: 0 0 0 0;
+    padding-left: 80px;
+    font-size: 64px;
+    font-style: italic;
+    background-image: url("../images/the-reactor.png");
+    background-size: contain;
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+.navigation {
+    grid-area: nav;
+    padding: 0;
+    border: none;
+}
+
+#nav-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: 1px solid #3a3a3a;
+    border-bottom: 1px solid #3a3a3a;
+}
+
+#main-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    list-style-type: none;
+}
+
+#main-nav a {
+    padding: 10px;
+    text-decoration: none;
+    color: #CC0000;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-style: italic;
+}
+
+#main-nav a:hover, #main-nav a:focus {
+    text-decoration: underline;
+}
+
+#main-nav a.active {
+    text-decoration: underline;
+}
+
+
+.latest {
+    grid-area: latest;
+    color: #3a3a3a;
+}
+
+.headline-link {
+    color: #CC0000;
+    text-decoration: none;
+}
+
+.latest-meta {
+    border-top: 1px solid #3a3a3a;
+    border-bottom: 1px solid #3a3a3a;
+    padding: 3px;
+    color: #CC0000;
+}
+
+h1.headline {
+    font-size: 28px;
+}
+
+.latest img {
+    padding: 3px;
+    margin: 15px 10px 10px 10px;
+    border: 1px solid #3a3a3a;
+    float: right;
+}
+
+.latest2 {
+    grid-area: latest2;
+    color: #3a3a3a;
+}
+
+.latest3 {
+    grid-area: latest3;
+    color: #3a3a3a;
+}
+
+.latest2 img, .latest3 img {
+    padding: 2px;
+    margin: 15px 5px 5px 5px;
+    border: 1px solid #3a3a3a;
+    float: right;
+}
+
+.latest2 .latest-meta, .latest3 .latest-meta {
+    font-size: 14px;
+}
+
+.read-more a {
+    text-decoration: none;
+    color: #CC0000;
+    font-weight: bold;
+}
+
+.aside {
+    grid-area: aside;
+    color: #3a3a3a;
+}
+
+#side-news-list {
+    list-style-type: none;
+    padding: 0 5px 0 10px;
+}
+
+#side-news-list h1 a {
+    text-decoration: none;
+    font-size: 18px;
+    color: #CC0000;
+}
+
+#side-news-list .latest-meta {
+    font-size: 14px;
+    color: #CC0000;
+}
+
+#side-news-list a:hover, #side-news-list a:focus {
+    text-decoration: underline;
+}
+
+#dates {
+    margin-top: 5px;
+    margin-left: 10px;
+    width: 200px;
+    height: 30px;
+    border: 1px solid #3a3a3a;
+    font-size: 18px;
+    color: #CC0000;
+    background-color: #eee;
+}
+
+#categories {
+    margin-top: 10px;
+    margin-left: 80px;
+    width: 300px;
+    height: 30px;
+    border: 1px solid #3a3a3a;
+    font-size: 18px;
+    color: #CC0000;
+    background-color: #eee;
+}
+
+#dates-top {
+    margin-top: 10px;
+    margin-left: 30px;
+    width: 300px;
+    height: 30px;
+    border: 1px solid #3a3a3a;
+    font-size: 18px;
+    color: #CC0000;
+    background-color: #eee;
+}
+
+footer {
+    grid-area: footer;
+}
+
+footer p {
+    font-weight: bold;
+    font-size: 18px;
+    font-style: italic;
+    text-align: center;
+}
+
+footer p a {
+    text-decoration: none;
+    color: #CC0000;
+}
+
+footer p a:hover, footer p a:focus {
+    text-decoration: underline;
+}
+
+@media (min-width: 720px) {
+    #container {
+        grid-template-rows: auto auto 1fr auto auto;
+        /* grid-template-rows: auto; */
+        grid-template-areas:
+        "header header header"
+        "nav nav nav"
+        "latest latest aside"
+        "latest2 latest3 aside"
+        "footer footer footer";
+    }
+}
+
+@media (min-width: 1020px) {
+    #container {
+        grid-template-rows: auto auto 1fr auto auto;
+        /* grid-template-rows: auto; */
+        grid-template-areas: 
+        "header header header"
+        "nav nav nav"
+        "latest latest aside"
+        "latest2 latest3 aside"
+        "footer footer footer";
+    }
+}
+
